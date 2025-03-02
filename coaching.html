@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching - Fitness</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <script>
+        function logoutUser() {
+            // Clear user session (if using localStorage)
+            localStorage.removeItem("loggedInUser");
+
+            // Redirect to exit page
+            window.location.href = "exit.html";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Fitness Coaching</h1>
+        <button onclick="logoutUser()" class="logout-btn">Logout</button> <!-- Logout Button -->
+    </header>
+
+    <div class="container">
+        <h2>Workout Plans</h2>
+        <ul>
+            <li>
+                Strength Training
+                <br>
+                <img src="strength training.jpeg" alt="Strength Training">       
+            </li>
+            <li>
+                Cardio Workouts
+                <br>
+                <img src="cardio.jpeg" alt="Cardio Workouts">            
+            </li>
+            <li>
+                Yoga & Flexibility
+                <br>
+                <img src="yoga.jpeg" alt="Yoga & Flexibility">       
+            </li>
+        </ul>
+
+        <h2>Nutrition & Diet</h2>
+        <ul>
+            <li>High Protein Diet</li>
+            <li>Weight Loss Meal Plan</li>
+            <li>Vegan Nutrition Guide</li>
+        </ul>
+
+        <a href="index.html">Back to Home</a>
+    </div>
+</body>
+</html>

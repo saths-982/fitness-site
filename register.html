@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Fitness Coaching</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking to the CSS file in the same directory -->
+    <script>
+        function showConfirmation(event) {
+            event.preventDefault(); // Prevents actual form submission
+            
+            let name = document.querySelector('input[name="name"]').value.trim();
+            let age = document.querySelector('input[name="age"]').value.trim();
+            let gender = document.querySelector('select[name="gender"]').value;
+            let goal = document.querySelector('input[name="goal"]').value.trim();
+            let password = document.querySelector('input[name="password"]').value;
+            let confirmPassword = document.querySelector('input[name="confirm_password"]').value;
+
+            // Validate all fields
+            if (name === "" || age === "" || gender === "" || goal === "" || password === "" || confirmPassword === "") {
+                alert("Please fill in all details.");
+                return;
+            }
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            // Check if user already exists in localStorage
+            if (localStorage.getItem(name)) {
+                alert("User already exists. Please use a different username or login.");
+                return;
+            }
+
+            // Store user details in localStorage
+            let userData = { age: age, gender: gender, goal: goal, password: password };
+            localStorage.setItem(name, JSON.stringify(userData));
+
+            // Hide form and show confirmation message
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("confirmationMessage").style.display = "block";
+
+            // Redirect to login page after 3 seconds
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Register for Fitness Coaching</h1>
+    <div class="container">
+        <form id="registrationForm" onsubmit="showConfirmation(event)">
+            <input type="text" name="name" placeholder="Username" required><br>
+            <input type="number" name="age" placeholder="Age" required><br>
+            <select name="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br>
+            <input type="text" name="goal" placeholder="Your Fitness Goal" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+            <button type="submit">Register</button>
+        </form>
+        
+        <p id="confirmationMessage" style="display:none; color:green; font-weight:bold;">You have successfully registered! Redirecting to login page...</p>
+        
+        <p>Already have an account? <a href="login.html">Login Here</a></p>
+    </div>
+</body>
+</html>
